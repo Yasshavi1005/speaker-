@@ -1,0 +1,106 @@
+import * as React from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  TextInput,
+  TouchableOpacity,
+  Image
+} from 'react-native';
+
+import * as Speech from 'expo-speech';
+import { Header } from 'react-native-elements';
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+    };
+  }
+
+  speak = () => {
+    var thingToSay = this.state.name;
+    this.state.name === ''
+      ? alert('Hi! First write a word bro')
+      : Speech.speak(thingToSay);
+  };
+
+  render() {
+    return (
+      <View style={styles.textContainer1}>
+        <Header
+          backgroundColor={'#FD812A'}
+          centerComponent={{
+            text: 'Text To Speech Converter',
+            style: { color: 'BLACK', fontSize: 16, fontWeight: 640 },
+          }}
+        />
+      <Image style={styles.buttonimage} source={require('./jhg.png')}/>
+
+        
+
+        <Text style={styles.text2}> Enter The Word </Text>
+        <TextInput
+          style={styles.inputBox}
+          onChangeText={(text) => {
+            this.setState({ name: text });
+          }}
+          value={this.state.name}
+        />
+
+        <View>
+          <TouchableOpacity style={styles.button} onPress={this.speak}>
+            <Text style={styles.text2}> Click Here To Hear Speech </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  inputBox: {
+    marginTop: 20,
+    width: '80%',
+    alignSelf: 'center',
+    height: 40,
+    textAlign: 'center',
+    borderWidth: 4,
+    outline: 'none',
+  },
+  textContainer1: {
+    backgroundColor: 'white',
+    flexShrink:4,
+    justifyContent: 'center',
+  },
+
+  text2: {
+    color: 'red',
+
+    fontSize: 30,
+    textAlign: 'center',
+    fontStyle: 'bold',
+    alignSelf: 'center',
+    fontWeight: 'bold',
+  },
+  button: {
+    padding:25,
+    fontSize: 20,
+    textAlign: 'center',
+    backgroundColor: '#07B89E',
+    marginTop: 80,
+    borderRadius: 50,
+    borderColor:"red",
+    borderWidth:5,
+    width: '70%',
+    alignSelf: 'center',
+    height: 170,
+  },
+  buttonimage: {
+    width: 150,
+    height: 150,
+    marginLeft: 95,
+  },
+});
